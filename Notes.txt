@@ -1,0 +1,74 @@
+# Using git
+
+## REFERENCES
+
+Cheatsheet : https://education.github.com/git-cheat-sheet-education.pdf
+
+Introduction : https://www.freecodecamp.org/news/what-is-git-and-how-to-use-it-c341b049ae61/
+
+concepts : https://thepilcrow.net/explaining-basic-concepts-git-and-github/
+
+## CONCEPTS
+
+concepts : version control (why, how), branches, commits, stashes, tags, versions (major / minor), messages, remote, repository, mirror / fork
+
+## HOW TO CREATE A GIT PROJECT
+
+create (from existing project / from scratch) / clone / fork / gitignore
+
+## BASICS
+
+status / add (/remove) / commit / push / log / fetch / pull / 
+branch (create / delete)
+stash (store / pop / list)
+reset
+
+## GIT IN A TEAM
+
+cf rapport stage G2
+
+git flow, branches, features, commit names / conventions, what to do in case there's a mistake, code review / pull (/merge) request / merge, CI, lint
+
+avoiding and managing conflicts (worst case scenarios, safety (rebase) branches)
+
+history management (amend, rebase, squash)
+
+## GO FURTHER
+
+where to look for more commands / how to read the docs
+github pages
+
+------------------------------------------------
+
+General hands-on :
+	- Must regroup all use cases
+	- Regroups all git-related steps for a typical "work session"
+		=> retrieving the existing work, creating a new branch, working on it, committing changes, etc.
+
+For each use case : 
+	- Cheatsheet and steps to reproduce (with commands).
+
+Use cases :
+1. I want to start working on a project.
+	- Create a projet from scratch.
+	- Work on an existing team project.
+	- Fork an existing project.
+
+2. I want to work on a project.
+	- Branches (create / delete / rename / list), commits (add only some files, all files, etc.) and stashes.
+	- Organize my local commit history.
+	- status / add / commit / push / log
+
+3. I want to contribute to a team project.
+	- Manage conflicts (force push).
+	- Manage conflicts when everything goes wrong (reset, delete).
+	- Pull request / code review.
+
+4. I want to share my project
+	- GitHub pages.
+
+------------------------------------------------
+
+TO DO :
+- Add a part in concepts about teamwork (conventions, etc.)
+- Add links in concepts to the different use cases.
