@@ -70,5 +70,59 @@ Use cases :
 ------------------------------------------------
 
 TO DO :
-- Add a part in concepts about teamwork (conventions, etc.)
 - Add links in concepts to the different use cases.
+
+
+------------------------------------------------
+
+Hands-on outline
+
+For each part, give a reference to a paragraph in concepts.
+
+1. PROJECT SETUP
+	[Fork, clone and install project]
+	- Create a fork of the project (because no write access)
+	- Clone it locally
+	- Optional : 
+		- How would I create a project from scratch
+		- How to give write access
+		- Manage different remotes (git remote -v, git remote add $upstream$, need to add the name of the remote for some operations)
+
+2. WORKING ON A NEW FEATURE
+	[Branches, commits, history management]
+	- Give a basic git flow to show how branches are supposed to be organized
+	- Create a new branch 
+		- one for testing that will be deleted (reset commit)
+		- another one that will be renamed and kept
+	- "Create a new feature" -> move a file, add an ignored file, modify a file
+	- Create a last test branch whose changes will be stashed and kept, committed in the first branch
+	- Rebase the two commits to respect the git flow
+	- Push the changes to the repo
+	- Create a new branch in prevision for the next part
+	- Make new changes, amend the previous commit and force-push
+
+3. CONTRIBUTING TO A TEAM PROJECT
+	[Merge conflicts]
+	- Intentionally create a merge conflict
+	- Merge conflicts and history re-writing
+
+4. DOCUMENTING THE CODE
+	- Setting up GitHub pages
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
