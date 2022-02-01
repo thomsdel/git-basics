@@ -415,8 +415,6 @@ Si tous les conflits sont réglés, vous aurez un message vous indiquant que le 
 > 
 > Une remarque pertinente ! On peut simplement squasher le "commit de rebase" dans le commit qu'on a apporté sur la branche pour clarifier l'historique. Encore une fois, attention à ne pas créer de nouveaux problèmes en réécrivant l'historique.
 
-
-
 ## Un mot sur les stashs
 
 On peut voir une *stash* comme un ensemble de changements qu'on décide de mettre dans sa poche pour les utiliser plus tard. Si vous voulez tester leur utilisation, faites des changements dans un fichier, et exécutez la séquence suivante : 
@@ -433,13 +431,11 @@ Vous verrez que `git status` ne montre plus vos changements après que vous les 
 
 Quelques notes supplémentaires : 
 
--  Vous pouvez mettre de côté vos changements, changer de branche et les `pop` sur cette nouvelle branche.
+- Vous pouvez mettre de côté vos changements, changer de branche et les `pop` sur cette nouvelle branche.
 
 - `pop` élimine la stash. Autrement dit, `pop` élimine la liste de vos changements de la liste de vos stashs.
 
 - Il est possible de manipuler plusieurs stashs, de les lister, de les renommer, etc. Je vous redirige vers la documentation si vous voulez tester ces cas d'usage en profondeur.
-
-
 
 ## Un mot sur le cherry-picking
 
@@ -450,8 +446,6 @@ git cherry-pick $COMMIT_ID
 ```
 
 Sachez toutefois que, comme avec toute opération de ce genre, il est possible que vous ayiez des conflits à gérer.
-
-
 
 ## Conclusion
 
