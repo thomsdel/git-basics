@@ -1,4 +1,4 @@
-# Les bases de git
+# Mise en situation
 
 Ce petit exemple de mise en pratique permettra de lister et d'utiliser les commandes git les plus courantes.
 
