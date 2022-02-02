@@ -1,0 +1,3 @@
+This complex code takes care of the visual part of the application.
+
+(impressive, is it not?)
