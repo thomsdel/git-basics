@@ -2,6 +2,8 @@
 
 Ce petit exemple de mise en pratique permettra de lister et d'utiliser les commandes git les plus courantes.
 
+
+
 ## Prérequis
 
 L'objectif étant de pratiquer l'utilisation de git, on supposera que les étapes suivantes sont des acquis : 
@@ -11,6 +13,8 @@ L'objectif étant de pratiquer l'utilisation de git, on supposera que les étape
 - Avoir un compte GitHub.
 
 - Avoir les autorisations pour pusher vers un repository GitHub (autrement dit, le PC connaît vos identifiants).
+
+
 
 ## Situation
 
@@ -41,6 +45,8 @@ Le *git flow* en vigueur dans l'équipe est le suivant :
 
 - Lorsque la branche de feature est "propre", une pull request doit être faite vers `project-develop`.
 
+
+
 ## Mise en place du projet
 
 Afin de pouvoir travailler sur le projet, il faut le récupérer sur GitHub [à l'addresse du présent repository](https://github.com/SnowHawkeye/git-basics).
@@ -52,6 +58,8 @@ En entreprise, vous auriez été ajouté en tant que collaborateur du projet. Ic
 Pour contourner ce problème, il suffit de créer un **fork** du projet, c'est-à-dire un miroir du repository qui vous sera propre. Pour cela, il suffit d'appuyer sur le bouton "Fork" en haut à droite de la page.
 
 Naviguez maintenant vers votre version du repository : vous aurez maintenant tous les accès nécessaires.
+
+
 
 ### Cloner le repository en local
 
@@ -73,6 +81,8 @@ git clone $REPOSITORY_URL
 
 Vous avez maintenant le dossier du repository dans vos fichiers locaux. N'oubliez pas d'y naviguer en ligne de commande avec `cd`.
 
+
+
 ## Travail sur le projet
 
 ### Vérifier les branches
@@ -87,21 +97,43 @@ Pour lister les branches que vous avez en local, utilisez :
 git branch
 ```
 
-Vous verrez alors listées les branches que vous avez sur votre machine, en particulier celles qui nous intéressent : `project-main` et `project-develop`. Si elles n'apparaissent pas, vous pouvez utiliser la commande suivante pour aller les chercher en remote :
+Puisque vous venez d'installer le projet, vous n'avez encore que la branche `main` en local. Si vous voulez voir les branches de la remote, utilisez : 
+
+```git
+git branch -r
+```
+
+Vous verrez que les noms de branche sont précédés par `origin/`, qui est le nom de la remote : cela indique bien que ce sont les branches sauvegardées en ligne.
+
+En particulier, vous devriez voir les branches qui nous intéressent : `project-main` et `project-develop`. Si elles n'apparaissent pas, vous pouvez utiliser la commande suivante pour aller les chercher en remote :
 
 ```git
 git fetch
 ```
 
-### Manipuler les branches
-
-Maintenant que vous êtes prêt et à jour, vous aimeriez commencer à travailler sur la nouvelle feature. Vous allez donc créer une nouvelle branche pour coder. Le problème étant : vous ne savez pas encore quel nom a été convenu pour cette nouvelle feature, et vous ne pouvez donc pas encore créer une branche qui respecte la convention `project-feature/$FEATURE_NAME$`.
-
-Toutefois, cela ne vous bloquera pas : il vous suffit de créer une branche temporaire que vous renommerez plus tard. Pour créer la branche, commencez par vous placer sur `project-develop` :
+Vous pouvez dès maintenant vous placer sur la branche `project-develop` :
 
 ```git
 git checkout project-develop
 ```
+
+Et récupérer d'éventuels changements que vous n'avez pas encore  :
+
+```git
+git pull
+```
+
+Si vous utilisez à nouveau `git branch -r`, vous devriez voir que la branche `origin/project-develop` est maintenant associée à votre branche locale correspondante.
+
+> De façon générale, si vous utilisez `checkout` pour n'importe quelle branche qui existe en remote, votre branche locale trackera la branche remote correspondante par défaut. Autrement dit, quand vous utilisez `pull`, c'est cette sur cette branche que git ira chercher les changements.
+
+
+
+### Manipuler les branches
+
+Maintenant que vous êtes prêt et à jour, vous aimeriez commencer à travailler sur la nouvelle feature. Vous allez donc créer une nouvelle branche pour coder. Le problème étant : vous ne savez pas encore quel nom a été convenu pour cette nouvelle feature, et vous ne pouvez donc pas encore créer une branche qui respecte la convention `project-feature/$FEATURE_NAME$`.
+
+Toutefois, cela ne vous bloquera pas : il vous suffit de créer une branche temporaire que vous renommerez plus tard. Commencez par vous assurer que vous êtes sur la bonne branche (par exemple avec `git branch`).
 
 > Si vous partez de la mauvaise branche pour coder votre feature, vous risquez de ne pas avoir tout le code dont vous avez besoin, ou de générer des conflits en ramenant le votre plus tard.
 
@@ -149,12 +181,16 @@ git checkout -b project-feature/sign-detection
 Quelques notes sur les commandes ci-dessus : 
 
 - `git reset --hard` **détruit tous vos changements** et vous remet dans l'état du dernier commit. A utiliser uniquement quand vous ne voulez rien garder. Ici, puisque la branche sera supprimée, sa seule utilité est de vous éviter d'avoir à commiter des changements que vous allez de toute façon perdre. Il existe des reset plus "soft" qu'on ne détaille pas ici.
+  
+  > Si vous avez créé des nouveaux fichiers, ils ne sont pas effacés automatiquement. Vous pouvez les voir avec `git status` et les supprimer manuellement.
 
 - Pour supprimer une branche avec `git branch -D`, il faut se trouver sur une autre branche. C'est pourquoi on commence par retourner sur `project-develop`. On note que la branche n'est supprimée que localement !
 
 - Une alternative ici aurait été de simplement renommer la branche après avoir utilisé `git reset --hard`.
 
 - Vous remarquerez que la nouvelle branche créée respecte les conventions de nommage de l'équipe !
+
+
 
 ### Création d'une nouvelle feature
 
@@ -166,13 +202,13 @@ Fort de ce travail préliminaire, vous êtes maintenant prêt à créer une nouv
 
 - Ouvrez le fichier `CoreCode.txt` du package `core` et ajoutez-y une ligne.
 
-- Du travail préparatoire avait été effectué avant votre arrivée, mais il est à un endroit de la codebase qui n'est plus pertinent. Déplacez le fichier `SignPrework.txt` vers le package `sign-detection`.
-
 - Imaginons que votre code génère des fichiers annexes à l'exécution. Ajoutez un fichier `GeneratedCode.txt` n'importe où dans le repository.
 
 > Tous ces "faux changements" n'ont d'objectif que de montrer les différents types de changement qui peuvent apparaître dans un commit. Certains d'entre eux seront utilisés pour illustrer d'autres points par la suite.
 
 Si vous utilisez `git status`, vous devriez voir tous les changements que vous avez faits : le nouveau dossier, le fichier modifié, le fichier déplacé, et le nouveau fichier.
+
+
 
 #### Les fichiers à ignorer
 
@@ -197,6 +233,8 @@ Il vous suffit de l'ouvrir et d'y ajouter une ligne avec le nom du fichier. Les 
 Si vous enregistrez le `.gitignore` et que vous utilisez à nouveau `git status`, vous devriez voir que le fichier "généré" n'est plus considéré comme ayant reçu des changements. En revanche, le `.gitignore` a maintenant été modifié.
 
 > Le `.gitignore` étant un fichier "commun", il est déconseillé de le modifier unilatéralement comme nous venons de le faire (pour éviter les conflits). Dans la réalité, on préfère utiliser des `.gitignore` pré-faits. Voir par exemple [ce lien](https://www.toptal.com/developers/gitignore)).
+
+
 
 #### Committer ses changements
 
@@ -229,6 +267,8 @@ Dans le code ci-dessus :
 - `git add .` permet d'ajouter tous les changements que vous voyez dans `git status` au commit.
 
 - Le message de commit ne respecte pas encore les conventions de l'équipe, mais vous aurez l'occasion de le changer par la suite quand vous squasherez les commits !
+
+
 
 #### Uploader ses changements
 
@@ -269,6 +309,8 @@ Lorsque vous êtes certain que tout est au propre, vous pouvez appuyer sur "Crea
 ![](figures/fig-pr.png)
 
 Il est bon de noter que si vous faites de nouveaux commits sur votre branche, ils seront automatiquement ajoutés à la PR tant qu'elle n'aura pas été mergée.
+
+
 
 ### Manipulation de l'historique
 
@@ -329,6 +371,8 @@ signs-detection:
 
 Validez le tout, et vous devriez avoir un message vous disant que votre rebase a été un succès. En utilisant `git log`, vous devriez voir le nouveau commit (et l'absence de ceux que vous avez remplacés !).
 
+
+
 ### Dernière mise à jour de la PR et merge
 
 Il n'y a maintenant plus qu'à pusher à nouveau ces changements. Cependant, comme vous avez changé l'historique de la branche, un simple `push` ne suffit pas, il faut utiliser un "force push" :
@@ -345,6 +389,8 @@ De retour dans votre terminal, vous pouvez retourner sur la branche `project-dev
 
 > Vous l'aurez sans doute remarqué, l'utilisation de rebase est un peu fastidieuse en ligne de commande. Certaines IDE (PyCharm, VSCode) peuvent vous simplifier la tâche en vous proposant une interface graphique.
 
+
+
 ### Résumé de la partie
 
 Félicitations, votre nouvelle feature est maintenant ajoutée à la branche de développement ! Ci-après un petit résumé des étapes franchies pour y parvenir :
@@ -358,6 +404,8 @@ Félicitations, votre nouvelle feature est maintenant ajoutée à la branche de 
 - Avec leur approbation (symbolique), vous avez regroupé vos commits en un seul, et mergé cet unique commit dans la branche de développement.
 
 Ce que vous avez vu jusqu'ici est suffisant pour la grande majorité de vos journées de développement. Dans la suite, nous verrons un dernier scénario auquel il faut savoir faire face quand on utilise git : la gestion des conflits.
+
+
 
 ## Gestion des conflits
 
@@ -403,17 +451,21 @@ C'est la façon dont git vous indique où sont les conflits. C'est donc à vous 
 
 Résolvez le conflit de la façon qui vous semble appropriée (n'oubliez pas d'enlever les "décorations" que git avait ajoutées !) et enregistrez le fichier.
 
-Pour pouvoir continuer le rebase, vous devez alors committer vos nouveaux changements (la résolution du conflit) et utiliser la commande :
+Pour pouvoir continuer le rebase, vous devez alors **committer vos nouveaux changements** (la résolution du conflit) et utiliser la commande :
 
 ```git
 git rebase --continue
 ```
 
+> Vous remarquerez que les fichiers non conflictuels `AddedInSource.txt` et `AddedInTarget.txt` sont tous deux présents au final : git ne vous embête pas s'il n'y a pas de problème à régler !
+
 Si tous les conflits sont réglés, vous aurez un message vous indiquant que le rebase s'est effectué avec succès. En utilisant `git log`, vous verrez que l'origine de la branche source a bien été modifiée, et vous verrez le commit que vous avez ajouté pendant le rebase.
 
-> "Mais le commit de rebase fait tâche dans l'historique !"
-> 
-> Une remarque pertinente ! On peut simplement squasher le "commit de rebase" dans le commit qu'on a apporté sur la branche pour clarifier l'historique. Encore une fois, attention à ne pas créer de nouveaux problèmes en réécrivant l'historique.
+> Lorsque vous résolvez plusieurs conflits à la suite, il est parfois difficile d'avoir de la visibilité sur les commits que vous faites. N'hésitez pas à nettoyer votre historique après un rebase (en faisant attention de ne pas générer de nouveaux conflits !)
+
+Si tout s'est passé comme prévu, vous devriez voir que le commit de la branche `target` est maintenant avant le commit que vous avez sur la branche `source` : c'est l'intérêt du rebase.
+
+
 
 ## Un mot sur les stashs
 
@@ -437,6 +489,8 @@ Quelques notes supplémentaires :
 
 - Il est possible de manipuler plusieurs stashs, de les lister, de les renommer, etc. Je vous redirige vers la documentation si vous voulez tester ces cas d'usage en profondeur.
 
+
+
 ## Un mot sur le cherry-picking
 
 Le *cherry pick* correspond à prendre un commit en particulier et à le ramener sur la branche courante. Il se fait simplement avec :
@@ -446,6 +500,8 @@ git cherry-pick $COMMIT_ID
 ```
 
 Sachez toutefois que, comme avec toute opération de ce genre, il est possible que vous ayiez des conflits à gérer.
+
+
 
 ## Conclusion
 
