@@ -1,0 +1,21 @@
+This is some very important code that will be shared through all features.
+
+	SomeClass {
+
+		someAttribute
+		someOtherAttribute
+		someMethod {
+			someCode
+		}
+	}
+
+	SomeClass {
+
+		someAttribute
+		someOtherAttribute
+		someMethod {
+			someCode
+		}
+	}
+
+And here is an extremely important line of code that has no particular purpose.
